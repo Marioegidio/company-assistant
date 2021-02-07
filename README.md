@@ -14,8 +14,29 @@ CompanyAssistant for Azure è  piattaforma web che offre le seguenti funzionalit
 
 <br><br><br>
 ## Architettura 
+||
+|:---:|
+|![alt text](https://github.com/Marioegidio/company-assistant/raw/main/arc.jpeg)|
 
-![alt text](./arc.jepg)
+<br><br><br>
+## Servizi Azure
+
+
+* **Virtual Machines**: per la creazione di macchine virtuali che saranno utilizzate dagli utenti;
+
+* **App Service**, per l'hosting della web app e del bot;
+
+* **Function App**, per eseguire alcune attività come la creazione o la cancellazione di macchine virtuali;
+
+* **Bot service**, per la creazione del bot di supporto alle problematiche aziendali;
+
+* **QnA Maker**, per la gestione automatizzata delle problematiche con memorizzazione storico risposte;
+
+* **LUIS**, per i suggerimenti intelligenti dei tag, da assegnare alla macchine virtuali e per i suggeriemnti legati alle configurazioni
+
+* **Azure SQL**, per la gestione dei dati persistanti;
+
+* **Event Grid**, per catturare e gestire eventi come l'avvenuta creazione di una macchina virtuale;
 
 
 
