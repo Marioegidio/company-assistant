@@ -16,7 +16,7 @@ CompanyAssistant for Azure è una piattaforma web che offre le seguenti funziona
 ## Architettura 
 ||
 |:---:|
-|![alt text](https://github.com/Marioegidio/company-assistant/raw/main/arc.jpeg)|
+|<img src="./doc/img/arc.jpeg" alt="drawing"/>|
 
 <br><br><br>
 ## Servizi Azure
@@ -40,5 +40,56 @@ CompanyAssistant for Azure è una piattaforma web che offre le seguenti funziona
 
 
 
+<br><br><br>
+## Installazione
+
+### 1. Installazione risorse azure
+* Esegui il seguente comando nella cartella root 
+```shell
+./azure.sh
+```
+
+* Crea il servizio QnAMaker, la knowledge base e il relativo bot, seguendo la [procedura guidata](https://www.qnamaker.ai/Create)
+
+<br>
+
+### 2. Configurazione LUIS
+* Recati sul [portale LUIS](https://www.luis.ai/applications)
+
+* Crea un nuovo Azure Cognitive Services Account, selezionando il resource group creato dallo script eseguito in precedenza
+  
+||
+|:---:|
+|<img src="./doc/img/3.png" alt="drawing" width="300"/>|
 
 
+* Crea una nuova app
+  
+||
+|:---:|
+|<img src="./doc/img/2.png" alt="drawing" width="300"/>|
+
+* Seleziona come Prediction resource la risorsa LUIS creata dallo script
+  
+||
+|:---:|
+|<img src="./doc/img/1.png" alt="drawing" width="300"/>|
+
+
+* Crea gli Intent in base alle categorie\configurazioni (che andranno inserite anche nel DB) di macchine virtuali da consigliare 
+
+<br>
+
+### 3. Configurazione Function App
+* Recati sul [portale Azure](https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroups),accedi al resource group creato, poi accedi alla function app creata dallo script e modifica le costanti, necessarie al funzionamento, che trovi all'inizio di ogni function
+<br>
+
+### 4. Configurazione environment
+* Modifica le variabili d'ambiente presenti nel file .env
+<br>
+
+### 5. Installazione dipendenze
+* Esegui il seguente comando nella cartella root 
+```shell
+npm install
+```
