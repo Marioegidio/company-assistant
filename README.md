@@ -44,6 +44,7 @@ CompanyAssistant for Azure è una piattaforma web che offre le seguenti funziona
 ## Installazione
 
 ### 1. Installazione risorse azure
+* Modifica i campi con il commento **#Update me** nel file azure.sh
 * Esegui il seguente comando nella cartella root 
 ```shell
 ./azure.sh
