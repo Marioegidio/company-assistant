@@ -1,5 +1,5 @@
 var User = require("../models/DAOs/Utente");
 
-exports.send = async function(username, callback) {
+exports.send = async function (username, callback) {
     User.deleteUser(username, callback)
 }

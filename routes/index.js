@@ -13,6 +13,9 @@ var UpdateVms = require('../controls/UpdateVms.js');
 var UseVM = require('../controls/useVM.js');
 var StopVM = require('../controls/stopVM.js');
 var crypto = require('../utilities/crpyto.js');
+var SendQuestionToLuis = require('../controls/sendQuestionToLuis.js');
+var GetVmTypeByName = require('../controls/getVmTypeByName.js');
+var GetTags = require('../controls/GetTag.js');
 var router = express.Router();
 
 
@@ -56,7 +59,6 @@ router.get('/users', function (req, res, next) {
                     GetTypes.getAllTypes(function (err, typesFound) {
 
                         if (!err) {
-                            //console.log(typesFound);
                             res.render('users', { title: 'Utenti', users: usersFound, user: req.session.user, types: typesFound });
                         } else {
                             res.render('error', { title: 'Errore nel richiedere i tipi utenti', message: err });
@@ -88,7 +90,21 @@ router.get('/vms', function (req, res, next) {
             GetVms.getAllVms(function (err, vms) {
 
                 if (!err) {
-                    res.render('vms', { title: 'VMs', virtualMachines: vms, user: req.session.user });
+
+                    GetTags.getAll((err, tags) => {
+
+                        if (!err) {
+
+                            res.render('vms', { title: 'VMs', virtualMachines: vms, user: req.session.user, tags: tags });
+
+                        } else {
+
+                            res.render('error', { title: 'Errore', message: err });
+
+                        }
+
+                    });
+
                 } else {
                     res.render('error', { title: 'Errore', message: err });
                 }
@@ -101,16 +117,16 @@ router.get('/vms', function (req, res, next) {
 router.get('/bot', function (req, res, next) {
     if (!req.session) {
         //SE L'UTENTE NON È LOGGATO
-        res.render('bot', { title: 'Company BOT', user: null });
+        res.render('bot', { title: 'Company BOT', user: null, urlBot: process.env.URL_ENBEDDED_BOT });
 
     } else {
         if (!req.session.user) {
             //SE L'UTENTE NON È LOGGATO
-            res.render('bot', { title: 'Company BOT', user: null });
+            res.render('bot', { title: 'Company BOT', user: null, urlBot: process.env.URL_ENBEDDED_BOT });
 
         } else {
             //SE L'UTENTE È LOGGATO
-            res.render('bot', { title: 'Company BOT', user: req.session.user });
+            res.render('bot', { title: 'Company BOT', user: req.session.user, urlBot: process.env.URL_ENBEDDED_BOT });
         }
     }
 });
@@ -118,9 +134,6 @@ router.get('/bot', function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
     var session = req.session;
-    //console.log("LOGIN");
-
-    //console.log(req.body.username + req.body.password)
     Login.login(req.body.username, req.body.password, function (err, user) {
 
         if (!err) {
@@ -130,7 +143,6 @@ router.post('/login', function (req, res, next) {
             res.render('./index', { title: 'Home Page', user: user });
         } else {
             //NEL CASO IN CUI IL LOGIN FALLISCE
-            //console.log("Non trovato")
             res.render('error', { title: 'Errore', message: err });
         }
 
@@ -146,30 +158,6 @@ router.get('/loginPage', function (req, res, next) {
     res.render('loginPage', { title: 'login' });
 });
 
-router.get('/createVMTest', function (req, res, next) {
-    res.render('createVMTest', { title: 'loginTest' });
-});
-
-router.get('/loggedTest', function (req, res, next) {
-    if (!req.session) {
-
-        //SE L'UTENTE NON È LOGGATO
-        res.render('loggedTest', { title: 'loggedTest', user: null });
-
-    } else {
-        if (!req.session.user) {
-
-            //SE L'UTENTE NON È LOGGATO
-            res.render('loggedTest', { title: 'loggedTest', user: null });
-
-        } else {
-            //SE L'UTENTE È LOGGATO
-            res.render('loggedTest', { title: 'loggedTest', user: req.session.user });
-
-        }
-    }
-
-});
 
 router.get('/info', function (req, res, next) {
     if (!req.session) {
@@ -192,12 +180,10 @@ router.get('/info', function (req, res, next) {
 router.post('/sendDataToBot', function (req, res, next) {
     SendDataToBot.send(req.body.answer, req.body.question, function (err, response) {
         if (!err) {
-            //res.json({ output: test });
-            //console.log("Inserita")
             res.send({ "esito": 'Inserita' });
 
         } else {
-            //console.log("NON inserita")
+            res.send({ "error": err });
         }
     });
 });
@@ -205,12 +191,10 @@ router.post('/sendDataToBot', function (req, res, next) {
 router.post('/register', function (req, res, next) {
     UserRegistration.send(req.body.name, req.body.lastname, req.body.username, req.body.password, req.body.userType, function (err, response) {
         if (!err) {
-            //res.json({ output: test });
-            //console.log("Registrato")
             res.send({ "esito": 'Registato' });
 
         } else {
-            //console.log("NON inserita")
+            res.send({ "error": err });
         }
     });
 });
@@ -218,12 +202,10 @@ router.post('/register', function (req, res, next) {
 router.post('/deleteUser', function (req, res, next) {
     DeleteUser.send(req.body.username, function (err, response) {
         if (!err) {
-            //res.json({ output: test });
-            //console.log("Eliminato")
             res.send({ "esito": 'Eliminato' });
 
         } else {
-            //console.log("NON inserita")
+            res.send({ "error": err });
         }
     });
 });
@@ -231,12 +213,9 @@ router.post('/deleteUser', function (req, res, next) {
 router.post('/deleteVM', function (req, res, next) {
     DeleteVM.send(req.body.name, function (err, response) {
         if (!err) {
-            //res.json({ output: test });
-            //console.log("Eliminata")
             res.send({ "esito": 'Eliminata' });
-
         } else {
-            //console.log("NON eliminata")
+            res.send({ "error": err });
         }
     });
 });
@@ -254,7 +233,7 @@ router.get('/VmCreatingDesktop', function (req, res, next) {
         });
 
     } else {
-        //console.log("Errore: req.query.name è null");
+        res.send({ "error": "Errore: req.query.name è null" });
     }
 
 });
@@ -285,7 +264,7 @@ router.get('/VmReady', function (req, res, next) {
         });
 
     } else {
-        //console.log("Errore: req.query.name è null");
+        res.send({ "error": "Errore: req.query.name è null" });
     }
 
 });
@@ -294,19 +273,16 @@ router.post('/useVM', function (req, res, next) {
 
     if (req.body.name != null && req.body.user != null) {
 
-        //console.log("ok")
         UseVM.changeUsage(req.body.name, req.body.user, function (err, response) {
             if (!err) {
-                //console.log("ok")
                 res.send({ "esito": 'Cambiato' });
             } else {
-                //console.log("no o")
                 res.send({ "esito": 'Non Cambiato' });
             }
         });
 
     } else {
-        //console.log("Errore: req.body.name è null");
+        res.send({ "error": "Errore: req.body.name è null" });
     }
 
 });
@@ -317,16 +293,14 @@ router.post('/stopVM', function (req, res, next) {
 
         StopVM.changeUsage(req.body.name, req.body.user, function (err, response) {
             if (!err) {
-                //console.log("ok")
                 res.send({ "esito": 'Cambiato' });
             } else {
-                //console.log("no o")
                 res.send({ "esito": 'Non Cambiato' });
             }
         });
 
     } else {
-        //console.log("Errore: req.body.name è null");
+        res.send({ "error": "Errore: req.body.name è null" });
     }
 
 });
@@ -338,40 +312,66 @@ router.post('/ifVmExist', function (req, res, next) {
         CreateVM.ifVmExistORinCreation(req.query.name, (err, vm) => {
 
             if (!err) {
-                //console.log("mo la mando, tranquillo")
 
                 if (vm.length == 0) {
-                    //console.log("Non c'è nel DB");
                     res.send({ "inCreation": false });
 
                 } else {
 
                     if (vm[0].state == "Vm in creazione") {
-                        //console.log("VM in creazione");
                         var decrpyted = crypto.decrypt({ content: vm[0].password });
                         var password = decrpyted;
                         res.send({ "inCreation": true, "username": vm[0].username, "password": password, "os": vm[0].osType });
                     } else {
                         res.send({ "inCreation": false });
                     }
-
                 }
 
-                // res.status(200);
-
-
             } else {
-                //res.status(500);
-                res.send("errore" + '');
-                //console.log("Errore: " + err);
+                res.send("errore" + err);
             }
 
         });
 
     } else {
-        //console.log("Errore: req.query.name è null");
+        res.send({ "error": "Errore: req.query.name è null" });
     }
 
+});
+
+router.post('/sendQuestionToLuis', function (req, res, next) {
+
+    if (req.session != null) {
+        if (req.session.user != null) {
+            if (req.session.user.userType == "admin") {
+
+                SendQuestionToLuis.sendQuestionToLuis(req.body.question, function (err, response) {
+                    if (!err) {
+                        GetTags.getTagsByMachineType(response, (err, tags) => {
+                            if (!err) {
+
+                                GetVmTypeByName.getVmTypeByName(response, (err, vmType) => {
+                                    if (!err) {
+                                        res.send({ "tags": tags, "categoria": response, "os": vmType[0].operative_system, "vmSize": vmType[0].requirements });
+                                    } else {
+                                        res.send({ "error": err });
+                                    }
+                                });
+
+                            } else {
+                                res.send({ "error": err });
+                            }
+                        });
+
+                    } else {
+                        res.send({ "error": err });
+                    }
+
+                });
+
+            } else { res.send({ "error": "Permesso negato" }); }
+        } else { res.send({ "error": "L'utente non è loggato" }); }
+    } else { res.send({ "error": "Sessione vuota" }); }
 });
 
 
@@ -385,36 +385,56 @@ router.post('/createVM', function (req, res, next) {
 
                     if (!exist) {
 
-                        CreateVM.createVM(req.body.name, req.body.username, req.body.password, req.body.vmSize, req.body.os, function (err, DBres) {
+                        var tagsChecked = JSON.parse(req.body.tagsChecked)
+                        CreateVM.createVM(req.body.name, req.body.username, req.body.password, req.body.vmSize, req.body.os, tagsChecked, function (err, DBres) {
 
                             if (!err) {
-                                //console.log("La VM è in creazione");
                                 res.send({ "esito": 'creazione' });
                             } else {
-                                //console.log("Errore nella creazione della VM");
-                                res.send({ "error": err });
-                                //console.log(err);
+                                console.log(err);
                             }
 
 
                         });
 
                     } else {
-                        //console.log("La VM già esiste");
+                        res.send({ "error": "La VM già esiste" });
                     }
 
 
                 });
+            } else { res.send({ "error": "Permesso negato" }); }
+        } else { res.send({ "error": "L'utente non è loggato" }); }
+    } else { res.send({ "error": "Sessione vuota" }); }
+});
 
+router.post('/filterByTags', function (req, res, next) {
 
-            } else {
-                //console.log("Permesso negato"); 
-            }
-        } else {
-            //console.log("L'utente non è loggato!"); 
-        }
+    if (!req.session) {
+        //SE L'UTENTE NON È LOGGATO
+        res.render('vms', { title: 'VMs', virtualMachines: null, user: null });
+
     } else {
-        //console.log("Non esiste una sessione!"); 
+        if (!req.session.user) {
+            //SE L'UTENTE NON È LOGGATO
+            res.render('vms', { title: 'VMs', virtualMachines: null, user: null });
+
+        } else {
+            //SE L'UTENTE È LOGGATO
+
+            var tags = JSON.parse(req.body.tags)
+            GetVms.getByTags(tags, function (err, vms) {
+
+                if (!err) {
+
+                    res.send({ "virtualMachines": vms, "user": req.session.user })
+
+                } else {
+                    res.render('error', { title: 'Errore', message: err });
+                }
+
+            });
+        }
     }
 });
 

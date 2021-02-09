@@ -18,11 +18,6 @@ function mostraAlertReload(msg) {
     document.getElementById("msgReload").innerHTML = msg + "<br><br>";
     document.getElementById("back").style.display = "block";
 } 
-function mostraAlertConfirm(msg) {
-    document.getElementById("alertBoxConfirm").style.display = "block";
-    document.getElementById("msgConfirm").innerHTML = msg + "<br><br>";
-    document.getElementById("back").style.display = "block";
-}
 
 function aggiorna() {
     location.reload();

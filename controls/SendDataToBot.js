@@ -3,9 +3,9 @@ const axios = require('axios')
 const refreshKB = function (callback) {
     try {
         return axios({
-            url: 'https://YOUR_BOT/qnamaker/v4.0/knowledgebases/ENDPOINT',
+            url: 'https://companyassistantbotqna.cognitiveservices.azure.com/qnamaker/v4.0/knowledgebases/' + process.env.KNOWLEDGEBASES_ID,
             method: 'post',
-            headers: { "Ocp-Apim-Subscription-Key": "Subscription-Key" },
+            headers: { "Ocp-Apim-Subscription-Key": process.env.OCP_APIM_SUBSCRIPTION_KEY_BOT },
 
         })
     } catch (error) {
@@ -17,9 +17,9 @@ const refreshKB = function (callback) {
 const insertData = function (answer, question, callback) {
     try {
         return axios({
-            url: 'https://YOUR_BOT/qnamaker/v4.0/knowledgebases/ENDPOINT',
+            url: 'https://companyassistantbotqna.cognitiveservices.azure.com/qnamaker/v4.0/knowledgebases/' + process.env.KNOWLEDGEBASES_ID,
             method: 'patch',
-            headers: { "Ocp-Apim-Subscription-Key": "Subscription-Key" },
+            headers: { "Ocp-Apim-Subscription-Key": process.env.OCP_APIM_SUBSCRIPTION_KEY_BOT },
             data: {
                 "add": {
                     "qnaList": [{

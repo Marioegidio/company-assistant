@@ -418,3 +418,59 @@ exports.deleteVM = function (name, callback) {
     });
 
 }
+
+
+exports.fetchByTag = function (tags, callback) {
+
+    DbConnection.createConnection(function (err, con) {
+
+        var vms = [];
+
+        /* SELECT * From virtualMachine Where name = (SELECT  virtualMachine FROM tagVirtualMachine INNER JOIN tag ON tag.name  = tagVirtualMachine.tag WHERE tag.name = 'trest')*/
+
+        var query = "SELECT * From virtualMachine Where name IN (SELECT  virtualMachine FROM tagVirtualMachine INNER JOIN tag ON tag.name  = tagVirtualMachine.tag WHERE "
+
+        var i;
+        for (i = 0; i < tags.length - 1; i++) {
+            query = query + "tag.name = @tag" + i + " OR "
+        }
+
+        query = query + "tag.name = @tag" + i + ")"
+
+
+        const request = new Request(
+            query,
+            (err, rowCount) => {
+                if (err) {
+                    callback(err, null);
+                } else {
+                    callback(null, vms);
+                }
+                con.close();
+            }
+        );
+
+        request.on("row", columns => {
+            var element = {};
+            columns.forEach(column => {
+                element[column.metadata.colName + ''] = column.value
+            });
+
+            vms.push(new Vm(element.idAzure, element.name, element.username, element.password, element.state, element.inUse, element.ipAddr, element.utente, element.osType, element.description));
+
+        });
+
+        for (i = 0; i < tags.length; i++) {
+            request.addParameter("tag" + i, TYPES.VarChar, tags[i])
+        }
+
+
+
+        con.execSql(request);
+
+    });
+}
+
+
+
+

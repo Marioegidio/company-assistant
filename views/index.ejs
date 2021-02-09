@@ -34,7 +34,7 @@
             }
         </style>
         <script>
-            function logout(){
+            function logout() {
                 window.location.href = './logout';
             }
         </script>
@@ -43,6 +43,7 @@
     <body style="padding:0;padding-bottom:0px;margin:0;">
 
 
+        <!-- MENU SECTION -->
         <div class="card" style="padding: 0;margin-bottom:10px;margin:0; border:none">
             <div class="card-body"
                 style="padding: 5;margin:0;padding-bottom:15px;border-bottom: 1px solid rgb(187, 179, 179);  box-shadow: 1px 1px #eeeeee;">
@@ -50,41 +51,46 @@
 
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <div class="container-fluid">
-                      <a class="navbar-brand" href="#">CompanyAssistant</a>
-                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                      </button>
-                      <div class="collapse navbar-collapse" id="navbarText">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item" style="padding: 0% 10px;">
-                                <a class="nav-link active" aria-current="page" style="color: #0062cc;"
-                                    href="./index">Home</a>
-                            </li>
-                            <%if (user.userType=="admin" ){%>
+                        <a class="navbar-brand" href="#">CompanyAssistant</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item" style="padding: 0% 10px;">
-                                    <a class="nav-link" href="./users">Utenti</a>
+                                    <a class="nav-link active" aria-current="page" style="color: #0062cc;"
+                                        href="./index">Home</a>
                                 </li>
-                                <%}%>
+                                <%if (user.userType=="admin" ){%>
                                     <li class="nav-item" style="padding: 0% 10px;">
-                                        <a class="nav-link" href="./vms">Macchine Virtuali</a>
+                                        <a class="nav-link" href="./users">Utenti</a>
                                     </li>
-                                    <li class="nav-item" style="padding: 0% 10px;">
-                                        <a class="nav-link" href="./bot">Company BOT</a>
-                                    </li>
-                                    <li class="nav-item" style="padding: 0% 10px;">
-                                        <a class="nav-link" href="./info">Info</a>
-                                    </li>
-                        </ul>
-                        <span class="navbar-text">
-                            <button class="btn btn-primary my-2 my-sm-0" type="button" onclick="logout()">Logout</button>
-                        </span>
-                    </div>
+                                    <%}%>
+                                        <li class="nav-item" style="padding: 0% 10px;">
+                                            <a class="nav-link" href="./vms">Macchine Virtuali</a>
+                                        </li>
+                                        <li class="nav-item" style="padding: 0% 10px;">
+                                            <a class="nav-link" href="./bot">Company BOT</a>
+                                        </li>
+                                        <li class="nav-item" style="padding: 0% 10px;">
+                                            <a class="nav-link" href="./info">Info</a>
+                                        </li>
+                            </ul>
+                            <span class="navbar-text">
+                                <button class="btn btn-primary my-2 my-sm-0" type="button"
+                                    onclick="logout()">Logout</button>
+                            </span>
+                        </div>
                 </nav>
             </div>
         </div>
 
+        <!-- END MENU SECTION -->
         <div class="content">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="background-color: black;padding-top:5%;border-radius: 15px;" >
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"
+                style="background-color: black;padding-top:5%;border-radius: 15px;">
                 <ol class="carousel-indicators">
                     <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
                     <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
@@ -93,21 +99,24 @@
                 <div class="carousel-inner h-100">
                     <div class="carousel-item active" data-bs-interval="2000">
                         <center> <img src="images/efficiency.png" class="d-block w-75 rounded" alt="..."></center>
-                        <br><br><br><br><div class="carousel-caption d-none d-md-block">
+                        <br><br><br><br>
+                        <div class="carousel-caption d-none d-md-block">
                             <h5>Efficienza</h5>
                             <p>Tieni bassi i tuoi costi.</p>
                         </div>
                     </div>
                     <div class="carousel-item" data-bs-interval="2000">
                         <center><img src="images/flexibility.png" class="d-block  w-75 rounded" alt="..."></center>
-                        <br><br><br><br><div class="carousel-caption d-none d-md-block">
+                        <br><br><br><br>
+                        <div class="carousel-caption d-none d-md-block">
                             <h5>Flessibilità</h5>
                             <p>Accedi dovunque e con qualsiasi dispositivo.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <center><img src="images/power.png" class="d-block  w-75 rounded" alt="..."></center>
-                        <br><br><br><br><div class="carousel-caption d-none d-md-block">
+                        <br><br><br><br>
+                        <div class="carousel-caption d-none d-md-block">
                             <h5>Potenza</h5>
                             <p>Crea la macchina adatta alle tue esigenze al volo.</p>
                         </div>
@@ -137,9 +146,9 @@
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <strong>Efficienza, Potenza e Flessibilità.</strong> Grazie a Company Assistant non dovrai
-                            più preoccuparti della tua macchina. Se hai bisogno di na macchina performante o di più
-                            spazio sul disco non devi fare altro che
-                            creare la macchina adatta alle tue esigenze.
+                            più preoccuparti della potenza di calcolo della tua compagnia. Se necessiti di macchine più
+                            performanti non devi fare altro che
+                            crearne una adatta alle tue esigenze.
                         </div>
                     </div>
                 </div>

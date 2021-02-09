@@ -4,14 +4,14 @@ var Connection = require("tedious").Connection;
 const config = {
     authentication: {
         options: {
-            userName: "USERNAME", // update me
-            password: "PASSWORD" // update me
+            userName: process.env.DB_USER, 
+            password: process.env.DB_PASS 
         },
         type: "default"
     },
-    server: "SERVER", // update me
+    server: process.env.DB_HOST, 
     options: {
-        database: "DBNAME", //update me
+        database: process.env.DB_NAME, 
         encrypt: true
     }
 };
@@ -22,11 +22,9 @@ exports.createConnection = function (callback) {
     connection.connect(function (err) {
 
         if (!err) {
-            console.log("Connesso al DB!");
             callback(null, connection)
 
         } else {
-            console.log("Errore di connessione al DB: \n" + err);
             callback(err, null)
         }
 
