@@ -46,3 +46,7 @@ go
         tag varchar(255) not null constraint tagVirtualMachine_pk primary key nonclustered constraint tagVirtualMachine_tag_name_fk references tag
     )
 go
+
+INSERT INTO tipo VALUES ('admin',null),('dipendente',null) go
+INSERT INTO utente VALUES ('admin','$2b$10$tyQgSvnQv7d.3VEm3/tp0ecMJl7qDbY4MsvXmkz.u.jqPMxdHw/QC','admin','admin','admin') go
+
