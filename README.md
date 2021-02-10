@@ -58,6 +58,10 @@ Bisogna aver installato:
 ## Installazione
 
 ### 1. Installazione risorse azure
+* Esegui il seguente comando
+```shell
+az login
+```
 * Modifica i campi con il commento **#Update me** nel file azure.sh
 * Esegui il seguente comando nella cartella root 
 ```shell
