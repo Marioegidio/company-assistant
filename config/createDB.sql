@@ -50,8 +50,7 @@ go
 INSERT INTO tipo (name, descrizionr) VALUES (N'admin', null);
 INSERT INTO tipo (name, descrizionr) VALUES (N'dipendente', null);
 
-INSERT INTO utente (username, password, name, lastname, userType) VALUES (N'admin', N'$2b$10$i/hCHlFuiJgJ5CqKOrAQzeSo/2iwhmq10.eDdaNF4YVhd/Troa7Yu', N'admin', N'admin', N'admin');
-INSERT INTO utente (username, password, name, lastname, userType) VALUES (N'mariorossi', N'$2b$10$I3j22hFRbomWGZWpyb9lMekjJ8d9KC5z0BBCJViEfATeELPeMh8JG', N'Mario', N'Rossi', N'dipendente');
+INSERT INTO utente (username, password, name, lastname, userType) VALUES (N'admin', N'$2b$10$tyQgSvnQv7d.3VEm3/tp0ecMJl7qDbY4MsvXmkz.u.jqPMxdHw/QC', N'admin', N'admin', N'admin');
 
 INSERT INTO tag (name) VALUES (N'adobe');
 INSERT INTO tag (name) VALUES (N'editing');
