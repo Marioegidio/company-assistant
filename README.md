@@ -108,3 +108,10 @@ Bisogna aver installato:
 ```shell
 npm install
 ```
+
+<br><br><br>
+## Esecuzione
+```shell
+npm start
+```
+
