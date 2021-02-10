@@ -96,6 +96,7 @@ az login
 
 ### 4. Popolazione DB
 * Popola il DB, creato dallo script, con il file **config/createDB.sql**
+  * (L'utente inserito di default è di tipo admin. Le credenziali sono admin admin)
 <br>
 
 ### 5. Configurazione environment
