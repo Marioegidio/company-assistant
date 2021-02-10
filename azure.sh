@@ -1,6 +1,7 @@
 resGroupName="RESOURCE GROUP NAME"  #Update me
 adminDB="DB USERNAME"               #Update me
 passDB="DB PASSWORD"                #Update me
+subID="SUBSCRIPTION_ID"             #Update me
 storageName="mystorageaccount$RANDOM"
 planName="functionplan"
 functionAppName="createvirtualmachine$RANDOM"
@@ -10,7 +11,6 @@ webAppBotName="companyassistantBot$RANDOM"
 botName="companyassistant-bot$RANDOM"
 luisName="companyassistant-LUIS$RANDOM"
 serverDBName="companyassistantserver"
-subID="SUBSCRIPTION_ID" #Update me
 region=westeurope
 
 
