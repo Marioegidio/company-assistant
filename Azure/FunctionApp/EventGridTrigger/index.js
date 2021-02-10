@@ -8,7 +8,7 @@ const clientId = 'CLIENT-ID';
 const clientSecret = 'CLIENT-SECRET';
 const resGroup = 'RES-GROUP';
 const scopeAzure = "SCOPE"
-const server = "SERVER-URL"
+const server = "SERVER-URL" //url del server dove è in esecuzione la WebApp
 
 var username;
 var password;
