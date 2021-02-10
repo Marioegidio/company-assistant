@@ -14,8 +14,12 @@ CompanyAssistant for Azure è una piattaforma web che offre le seguenti funziona
 
 <br><br><br>
 ## Contatti
-* GitHub: [Lorenzo Fasolino](https://github.com/LorenzoFasolino) [Mario Egidio](https://github.com/Marioegidio) 
-* e-mail: fasolinolorenzo@gmail.com egidiomario6@gmail.com
+* GitHub: 
+  * [Lorenzo Fasolino](https://github.com/LorenzoFasolino) 
+  * [Mario Egidio](https://github.com/Marioegidio) 
+* e-mail: 
+  * fasolinolorenzo@gmail.com 
+  * egidiomario6@gmail.com
 
 <br><br><br>
 ## Architettura 
