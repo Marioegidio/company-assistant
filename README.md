@@ -109,7 +109,7 @@ npm install
 ```
 
 <br><br><br>
-## Esecuzione
+## Esecuzione in locale
 ```shell
 npm start
 ```
