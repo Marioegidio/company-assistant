@@ -38,6 +38,11 @@ CompanyAssistant for Azure è una piattaforma web che offre le seguenti funziona
 
 * **Event Grid**, per catturare e gestire eventi come l'avvenuta creazione di una macchina virtuale;
 
+<br><br><br>
+## Requisiti
+Bisogna aver installato:
+* [az](https://docs.microsoft.com/it-it/cli/azure/install-azure-cli)
+* [Node.js](https://nodejs.org/it/download/)
 
 
 <br><br><br>
@@ -85,11 +90,15 @@ CompanyAssistant for Azure è una piattaforma web che offre le seguenti funziona
 * Recati sul [portale Azure](https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroups),accedi al resource group creato, poi accedi alla function app creata dallo script e modifica le costanti, necessarie al funzionamento, che trovi all'inizio di ogni function
 <br>
 
-### 4. Configurazione environment
+### 4. Popolazione DB
+* Popola il DB, creato dallo script, con il file **config/creataDB.sql**
+<br>
+
+### 5. Configurazione environment
 * Modifica le variabili d'ambiente presenti nel file .env
 <br>
 
-### 5. Installazione dipendenze
+### 6. Installazione dipendenze
 * Esegui il seguente comando nella cartella root 
 ```shell
 npm install
