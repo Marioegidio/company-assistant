@@ -13,6 +13,11 @@ CompanyAssistant for Azure è una piattaforma web che offre le seguenti funziona
 * **Gestione automatizzata delle problematiche con memorizzazione storico risposte (QnA).** La piattaforma prevede una sezione dove ogni utente può condividere le problematiche riscontrare con la relativa soluzione. Qui, un secondo utente può consultare e verificare se un problema riscontrato è già stato risolto da qualche altro collega.
 
 <br><br><br>
+## Contatti
+* [Lorenzo Fasolino](https://github.com/LorenzoFasolino) fasolinolorenzo@gmail.com
+* [Mario Egidio](https://github.com/Marioegidio) egidiomario6@gmail.com
+
+<br><br><br>
 ## Architettura 
 ||
 |:---:|
