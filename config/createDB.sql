@@ -47,6 +47,24 @@ go
     )
 go
 
-INSERT INTO tipo VALUES ('admin',null),('dipendente',null) go
-INSERT INTO utente VALUES ('admin','$2b$10$tyQgSvnQv7d.3VEm3/tp0ecMJl7qDbY4MsvXmkz.u.jqPMxdHw/QC','admin','admin','admin') go
+INSERT INTO Assistant.dbo.tipo (name, descrizionr) VALUES (N'admin', null);
+INSERT INTO Assistant.dbo.tipo (name, descrizionr) VALUES (N'dipendente', null);
 
+INSERT INTO Assistant.dbo.utente (username, password, name, lastname, userType) VALUES (N'admin', N'$2b$10$i/hCHlFuiJgJ5CqKOrAQzeSo/2iwhmq10.eDdaNF4YVhd/Troa7Yu', N'admin', N'admin', N'admin');
+INSERT INTO Assistant.dbo.utente (username, password, name, lastname, userType) VALUES (N'mariorossi', N'$2b$10$I3j22hFRbomWGZWpyb9lMekjJ8d9KC5z0BBCJViEfATeELPeMh8JG', N'Mario', N'Rossi', N'dipendente');
+
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'adobe');
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'editing');
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'fotografia');
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'grafica');
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'java');
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'photo');
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'python');
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'sicurezza');
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'ubuntu');
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'video');
+INSERT INTO Assistant.dbo.tag (name) VALUES (N'windows');
+
+INSERT INTO Assistant.dbo.machineType (name, requirements, operative_system) VALUES (N'editing', N'Standard_B2s', N'windows');
+INSERT INTO Assistant.dbo.machineType (name, requirements, operative_system) VALUES (N'machine_learning', N'Standard_B2s', N'ubuntu');
+INSERT INTO Assistant.dbo.machineType (name, requirements, operative_system) VALUES (N'cybersecurity', N'Standard_B1s', N'ubuntu');
