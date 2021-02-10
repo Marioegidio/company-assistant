@@ -115,3 +115,7 @@ npm install
 npm start
 ```
 
+<br><br><br>
+## Contenuti
+* [Video demo](https://youtu.be/SoRuxS4YjUk)
+* [Presentazione](https://drive.google.com/file/d/1z0R0ThRhjfrjCADKq-KkAm5QUky4NaNr/view?usp=sharing)
