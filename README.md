@@ -4,7 +4,7 @@ In questo periodo legato al Covid-19 molte aziende e professionisti sono stati c
 Infatti, molti lavoratori, usufruendo spesso delle macchine disponibili presso l’azienda per svolgere le proprie mansioni, potrebbero riscontrare grossi problemi nel dover utilizzare macchine proprie in quanto, spesso, meno performanti. Inoltre, molte aziende a causa di scarsità di risorse e tempo non potrebbero permettersi di realizzare infrastrutture on-premise.
 A tal proposito viene proposta una soluzione basata sull’utilizzo di alcuni servizi Cloud offerti da Microsoft Azure.
 
-CompanyAssistant for Azure è una piattaforma web che offre le seguenti funzionalità:
+**CompanyAssistant for Azure** è una piattaforma web che offre le seguenti funzionalità:
 
 * **Gestione di macchine virtuali.** In questo caso l’admin della piattaforma ha la possibilità di creare macchine virtuali adatte alle esigenze dell’azienda e del singolo utente con pochi click. Il tutto restando all’interno della piattaforma, quindi senza interagire con ambienti esterni. Inoltre ha la possibilità di visualizzare lo stato delle macchine e il loro utilizzo.
 
