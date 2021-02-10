@@ -91,7 +91,7 @@ Bisogna aver installato:
 <br>
 
 ### 4. Popolazione DB
-* Popola il DB, creato dallo script, con il file **config/creataDB.sql**
+* Popola il DB, creato dallo script, con il file **config/createDB.sql**
 <br>
 
 ### 5. Configurazione environment
