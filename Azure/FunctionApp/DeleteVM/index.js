@@ -4,7 +4,6 @@ const tanentId = 'TENANT-ID';
 const subId = 'SUBSCRIPTION-ID';
 const clientId = 'CLIENT-ID';
 const clientSecret = 'CLIENT-SECRET';
-const functionAppId = 'FUNCTION-APP-ID';
 const resGroup = 'RES-GROUP';
 var vmName = 'test64';
 const scopeAzure = "SCOPE"
@@ -17,7 +16,6 @@ module.exports =  function (context, req) {
 
     getToken(function(err,token){
 
-        context.log(token);
 
         if(!err){
 
@@ -25,15 +23,13 @@ module.exports =  function (context, req) {
 
                 if(!err){
 
-                    context.log("OK");
                     context.res = { status: 200, body: 'ok' }
                     context.done();
 
 
 
                 }else{
-                    context.log("Errore cancellazione VM: "+err);
-                    context.res = { status: 400, body: 'nooooo' }
+                    context.res = { status: 400, body: 'errore' }
                     context.done();
                 }
 
@@ -42,8 +38,7 @@ module.exports =  function (context, req) {
 
 
         }else{
-            context.res = { status: 200, body: 'Errore Token' }
-            context.log("Errore Token")
+            context.res = { status: 400, body: 'Errore Token' }
             context.done();
         }
         
@@ -79,66 +74,6 @@ var deleteVm = function(token,callback){
 
 
 }
-
-
-//Cancella LA NETWORK INTERFACE 
-var deleteNetworkInterface = function(token,callback){
-
-    var options = {
-        uri:'https://management.azure.com/subscriptions/'+subId+'/resourceGroups/'+resGroup+'/providers/Microsoft.Network/networkInterfaces/'+vmName+'_netInterface?forceDelete=true&api-version=2020-07-01',
-        method: 'DELETE',
-        headers:{
-            'Authorization': "Bearer "+token
-        }
-    };
-
-    request(options, function (error, response, body){
-
-              
-        if(!error && response.statusCode == 202){
-            callback(null,response);
-            
-        }else{
-            callback(error, body);
-        }
-            
-    });
-
-
-}
-
-
-
-//Cancella L' IP'
-var deleteIp = function(token,callback){
-
-    var options = {
-        uri:'https://management.azure.com/subscriptions/'+subId+'/resourceGroups/'+resGroup+'/providers/Microsoft.Network/publicIPAddresses/'+vmName+'_ip?forceDelete=true&api-version=2020-07-01',
-        method: 'DELETE',
-        headers:{
-            'Authorization': "Bearer "+token
-        }
-    };
-
-    request(options, function (error, response, body){
-
-              
-        if(!error && response.statusCode == 202){
-            callback(null,response);
-            
-        }else{
-            callback(error, body);
-        }
-            
-    });
-
-
-}
-
-
-
-
-
 
 
 
@@ -179,10 +114,3 @@ var getToken = function(callback){
 }
 
 
-
-function msleep(n) {
-  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
-}
-function sleep(n) {
-  msleep(n*1000);
-}

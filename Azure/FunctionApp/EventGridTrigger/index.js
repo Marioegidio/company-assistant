@@ -2,13 +2,10 @@ const request = require('request');
 const axios = require('axios');
 const querystring = require('querystring');
 const SSHConnection = require('node-ssh-forward').SSHConnection;
-const url = "https://management.azure.com"
-const apiName = "api-version=2020-06-01"
 const tanentId = 'TENANT-ID';
 const subId = 'SUBSCRIPTION-ID';
 const clientId = 'CLIENT-ID';
 const clientSecret = 'CLIENT-SECRET';
-const functionAppId = 'FUNCTION-APP-ID';
 const resGroup = 'RES-GROUP';
 const scopeAzure = "SCOPE"
 const server = "SERVER-URL"
@@ -27,7 +24,6 @@ module.exports =  async function (context, eventGridEvent) {
     vmName = array[array.length-1];
 
 
-    context.log("EVENTO: "+eventType+ " VM: "+vmName);
 
 
     if(eventType == 'Microsoft.Resources.ResourceWriteSuccess'){
@@ -35,7 +31,7 @@ module.exports =  async function (context, eventGridEvent) {
             var inCreation;
             try {
                 const response =  await axios.post(server+'/ifVmExist?name=' + vmName, {});
-                context.log(`statusCode: ${response.statusCode}`);
+                
                 inCreation = response.data.inCreation;
                 username = response.data.username
                 password = response.data.password
@@ -98,15 +94,11 @@ module.exports =  async function (context, eventGridEvent) {
 
                 }
 
-            //return response; // or return a custom object using properties from response
         } catch (error) {
-            // If the promise rejects, an error will be thrown and caught here
             context.log(error); 
         }
 
     }else{
-
-            context.log("Elimino")
 
             var promiseToken = new Promise(function (resolve, reject) {
 
@@ -128,7 +120,6 @@ module.exports =  async function (context, eventGridEvent) {
                 deleteDisk(token,function(err,res){
 
                     if(!err){
-                        context.log("ELIMINAZIONE DISCO");
                         resolve(true);
                     }else{
                         resolve(false);
@@ -140,14 +131,12 @@ module.exports =  async function (context, eventGridEvent) {
 
             var diskDeleted = await promiseDisk;
 
-            context.log("Disco cancellato: "+diskDeleted);
 
             var promiseNet= new Promise(function (resolve, reject) {
 
                 deleteNetworkInterface(token,function(err,res){
 
                     if(!err){
-                        context.log("ELIMINAZIONE NETWORK INTERFACE");
                         resolve(true);
                     }else{
                         resolve(false);
@@ -160,7 +149,6 @@ module.exports =  async function (context, eventGridEvent) {
             var netDeleted = await promiseNet;
 
             
-            context.log("Network interface cancellata: "+netDeleted);
 
             var promiseIp = new Promise(function (resolve, reject) {
 
@@ -169,7 +157,6 @@ module.exports =  async function (context, eventGridEvent) {
                     deleteIp(token,function(err,res){
 
                         if(!err){
-                            context.log("ELIMINAZIONE IP");
                             resolve(true);
                         }else{
                             resolve(false);
@@ -185,8 +172,6 @@ module.exports =  async function (context, eventGridEvent) {
 
             var ipDeleted = await promiseIp;
 
-            
-            context.log("IP address cancellato: "+ipDeleted);
 
             
         

@@ -4,7 +4,6 @@ const tanentId = 'TENANT-ID';
 const subId = 'SUBSCRIPTION-ID';
 const clientId = 'CLIENT-ID';
 const clientSecret = 'CLIENT-SECRET';
-const functionAppId = 'FUNCTION-APP-ID';
 const resGroup = 'RES-GRUOP';
 var vmName = 'test64';
 var vmSize = 'Standard_B1s';
@@ -13,7 +12,6 @@ var imageRef =  {}
 
 module.exports =  async function (context, req) {
 
-    context.log("Eseguo")
     imageRef = {};
 
     vmName = (req.query.name || (req.body.name));
@@ -22,7 +20,6 @@ module.exports =  async function (context, req) {
     vmSize = (req.query.vmSize || (req.body.vmSize));
     os = (req.query.os || (req.body.os));
 
-    context.log("OS -> "+os);
 
     if(os.toString().trim() == "windows"){
         imageRef = {
@@ -40,7 +37,6 @@ module.exports =  async function (context, req) {
                     }
     }
 
-    context.log(imageRef)
 
     var error = null;
 
@@ -116,8 +112,6 @@ module.exports =  async function (context, req) {
 
     var resVm = await promiseVM;
 
-    context.log("resVm -> "+resVm)
-
     var res 
 
     if(!error){
@@ -147,8 +141,6 @@ module.exports =  async function (context, req) {
     }
 
     context.done();
-    context.log("Fine")
-
 
         
 }
@@ -284,7 +276,6 @@ var createVm = function(token,callback){
         }
     }
 
-    //var form = querystring.stringify(data);
 
     var options = {
         uri:'https://management.azure.com/subscriptions/'+subId+'/resourceGroups/'+resGroup+'/providers/Microsoft.Compute/virtualMachines/'+vmName+'?api-version=2017-12-01',
@@ -350,12 +341,6 @@ var getToken = function(callback){
 }
 
 
-function msleep(n) {
-  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
-}
-function sleep(n) {
-  msleep(n*1000);
-}
 
 
 
