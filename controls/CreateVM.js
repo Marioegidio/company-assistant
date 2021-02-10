@@ -9,7 +9,7 @@ var TagVirtualMachine = require('../models/DAOs/TagVirtualMachine.js');
 exports.createVM = function (name, username, password, vmSize, os, tags, callback) {
 
     var id = "/subscriptions/" + process.env.SUBSCRIPTION_ID + "/resourceGroups/" + process.env.VM_RES_GROUP + "/providers/Microsoft.Compute/virtualMachines/" + name;
-    axios.post('https://createvirtualmachine.azurewebsites.net/api/CreateVM?code=' + process.env.FUNCTION_CREATEVM_KEY + '==&name=' + name + '&username=' + username + '&password=' + password + '&vmSize=' + vmSize + '&os=' + os, { headers: { 'Content-Type': 'application/application.json' } })
+    axios.post(process.env.URL_FUNCTION_CREATEVM+'?code=' + process.env.FUNCTION_CREATEVM_KEY + '==&name=' + name + '&username=' + username + '&password=' + password + '&vmSize=' + vmSize + '&os=' + os, { headers: { 'Content-Type': 'application/application.json' } })
         .then(function (response) {
 
             if (!response.data.error) {

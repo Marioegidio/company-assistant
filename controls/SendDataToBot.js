@@ -3,7 +3,7 @@ const axios = require('axios')
 const refreshKB = function (callback) {
     try {
         return axios({
-            url: 'https://companyassistantbotqna.cognitiveservices.azure.com/qnamaker/v4.0/knowledgebases/' + process.env.KNOWLEDGEBASES_ID,
+            url: process.env.URL_QNA_MAKER+'/v4.0/knowledgebases/' + process.env.KNOWLEDGEBASES_ID,
             method: 'post',
             headers: { "Ocp-Apim-Subscription-Key": process.env.OCP_APIM_SUBSCRIPTION_KEY_BOT },
 
